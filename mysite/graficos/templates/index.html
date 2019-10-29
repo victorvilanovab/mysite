@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Pagina principal</title>
+</head>
+<body>
+    <h1>Bem vindo ao fazedor de Gráficos</h1>
+
+    {% if dados %}
+    <ul>
+        {% for data in data %}
+        <li>{{ data.dadosx }}/ {{ data.dadosy }}</li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>Coloque os dados:</p>
+    {% endif %}
+    <div class="row">
+        <div class="col">
+            <form action="{% url 'index' %}" method="post" class="form">
+                {% csrf_token %}
+
+                <input type="submit" value="Plotar" class="btn btn-primary">
+            </form>
+        </div>
+        <div class="col-9">
+            {% block grafico %}
+            {{ div|safe }}
+            {% endblock %}
+        </div>
+
+</body>
+</html>
